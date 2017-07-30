@@ -4,12 +4,16 @@ using System.Linq;
 using System.Web;
 using System.Threading.Tasks;
 using Telegram.Bot;
+using SimpleBot.Models.Commands;
 
 namespace SimpleBot.Models
 {
     public static class Bot
     {
         private static TelegramBotClient client;
+        private static List<Command> commandList;
+
+        public static IReadOnlyList<Command> Commands { get => commandList.AsReadOnly(); }
 
         public static async Task<TelegramBotClient> Get()
         {
@@ -17,6 +21,10 @@ namespace SimpleBot.Models
             {
                 return client;
             }
+
+            commandList = new List<Command>();
+            commandList.Add(new HelloCommand());
+            //TODO: Add more commands
 
             client = new TelegramBotClient(AppSettings.Key);
             await client.SetWebhookAsync("");
