@@ -13,7 +13,7 @@ namespace SimpleBot.Models
         private static TelegramBotClient client;
         private static List<Command> commandList;
 
-        public static IReadOnlyList<Command> Commands { get => commandList.AsReadOnly(); }
+        public static IReadOnlyList<Command> Commands => commandList.AsReadOnly();
 
         public static async Task<TelegramBotClient> Get()
         {
@@ -22,12 +22,15 @@ namespace SimpleBot.Models
                 return client;
             }
 
-            commandList = new List<Command>();
-            commandList.Add(new HelloCommand());
+            commandList = new List<Command>
+            {
+                new HelloCommand()
+            };
             //TODO: Add more commands
 
             client = new TelegramBotClient(AppSettings.Key);
-            await client.SetWebhookAsync("");
+            var hook = string.Format(AppSettings.Url, "api/message/update");
+            await client.SetWebhookAsync(hook);
 
             return client;
         }

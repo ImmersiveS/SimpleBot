@@ -25,7 +25,7 @@ namespace SimpleBot.Controllers
                 if (command.Contains(message.Text))
                 {
                     command.Execute(message, client);
-                    break;
+                    return Ok();
                 }
             }
             return Ok();
