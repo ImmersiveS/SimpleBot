@@ -7,7 +7,7 @@ namespace SimpleBot.Models
 {
     public static class AppSettings
     {
-        public static string Url { get; set; } = "https://telegrambotapp.azurewebsites.net:443/{0}";
+        public static string Url { get; set; } = "http://simplebot.azurewebsites.net/";
 
         public static string Name { get; set; } = "John_Clucker_bot";
 
